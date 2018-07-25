@@ -1,3 +1,6 @@
+const express = require("express");
+const app = express();
+
 function bananaMe(date, days) {
   // check for correct data
   if (isNaN(days)) {
@@ -11,7 +14,7 @@ function bananaMe(date, days) {
     };
   }
 
-  // establish today
+  // establish start date
   var d = new Date(date);
   var cost = 0;
 
@@ -32,4 +35,17 @@ function bananaMe(date, days) {
   };
 }
 
-console.log(bananaMe("7/31/2018", 2));
+app.get("/", function(req, res) {
+  res.send("Test API on /api/banana?startDate=&numberOfDays=");
+});
+
+app.get("/api/banana", function(req, res) {
+  // send query parameters into banana algorithm
+  var data = bananaMe(req.query.startDate, req.query.numberOfDays);
+  res.json(data);
+});
+
+// start server
+app.listen(process.env.PORT || 3000, function() {
+  console.log("app started...");
+});
