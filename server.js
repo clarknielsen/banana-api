@@ -8,7 +8,7 @@ function bananaMe(date, days) {
       error: "Number of days required"
     };
   }
-  else if (!date.match(/[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}/)) {
+  else if (!date.match(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/)) {
     return {
       error: "Date must be in MM/DD/YYYY format"
     };
@@ -31,7 +31,7 @@ function bananaMe(date, days) {
   }
 
   return {
-    cost: cost.toFixed(2)
+    cost: parseFloat(cost.toFixed(2))
   };
 }
 
